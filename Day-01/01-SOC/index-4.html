@@ -39,21 +39,25 @@
 				if (_data[attrName] === value) return;
 				_data[attrName] = value;
 				//trigger change notification for 'attrName'
-				var listenerFn = _changeListeners[attrName];
-				if (typeof listenerFn === 'function')
-					listenerFn();
+				var listenerFns = _changeListeners[attrName];
+				listenerFns.forEach(function(listenerFn){
+					if (typeof listenerFn === 'function')
+						listenerFn();	
+				})
+				
 			};
 
 			var _changeListeners = {
-				basic : null,
-				hra : null,
-				da : null,
-				tax : null,
-				salary : null
+				basic : [],
+				hra : [],
+				da : [],
+				tax : [],
+				salary : []
 			};
 
 			this.onChange = function(attrName, listenerFn){
-				_changeListeners[attrName] = listenerFn;
+				var listenerFns = _changeListeners[attrName]
+				listenerFns.push(listenerFn);
 			}
 			
 		}
@@ -65,51 +69,71 @@
 		}
 
 		//View
-		$(function(){
-			window.calculator = new SalaryCalculator();
+		function SalaryCalculatorView(calculator, $viewRoot){
 
 			//Reacting to user actions
-			$("#txtBasic").change(function(){
-				calculator.set('basic', $("#txtBasic").val().toInt());
+			$("#txtBasic", $viewRoot).change(function(){
+				calculator.set('basic', $(this).val().toInt());
 			});
-			$("#txtHra").change(function(){
-				calculator.set('hra', $("#txtHra").val().toInt());
+			$("#txtHra", $viewRoot).change(function(){
+				calculator.set('hra', $(this).val().toInt());
 			});
-			$("#txtDa").change(function(){
-				calculator.set('da', $("#txtDa").val().toInt());
+			$("#txtDa", $viewRoot).change(function(){
+				calculator.set('da', $(this).val().toInt());
 			});
-			$("#rangeTax").change(function(){
-				calculator.set('tax', $("#rangeTax").val().toInt());
+			$("#rangeTax", $viewRoot).change(function(){
+				calculator.set('tax', $(this).val().toInt());
 			});
-			$("#btnCalculate").click(function(){
+			$("#btnCalculate", $viewRoot).click(function(){
 				calculator.calculate();
 			});
 
 			
 			//Reacts to model changes
 			calculator.onChange('salary', function(){
-				$("#divResult").html(calculator.get('salary'));
+				$("#divResult", $viewRoot).html(calculator.get('salary'));
 			});
 			calculator.onChange('basic', function(){
-				$("#txtBasic").val(calculator.get('basic'));
+				$("#txtBasic", $viewRoot).val(calculator.get('basic'));
 			});
 			calculator.onChange('hra', function(){
-				$("#txtHra").val(calculator.get('hra'));
+				$("#txtHra", $viewRoot).val(calculator.get('hra'));
 			});
 			calculator.onChange('da', function(){
-				$("#txtDa").val(calculator.get('da'));
+				$("#txtDa", $viewRoot).val(calculator.get('da'));
 			});
 			calculator.onChange('tax', function(){
-				$("#rangeTax").val(calculator.get('tax'));
-				$("#spanTax").html(calculator.get('tax'));
+				$("#rangeTax", $viewRoot).val(calculator.get('tax'));
+				$("#spanTax", $viewRoot).html(calculator.get('tax'));
 			});
+		}
+		$(function(){
+			window.calculator = new SalaryCalculator();
+
+			
+			
 		});
 	</script>
 </head>
 <body>
 	<h1>Salary Calculator</h1>
 	<hr>
-	<section class="content">
+	<section class="content" id="section-1">
+		<div class="field"><label for="">Basic :</label><input type="text" name="" id="txtBasic"></div>
+		<div class="field"><label for="">HRA :</label><input type="text" name="" id="txtHra"></div>
+		<div class="field"><label for="">DA :</label><input type="text" name="" id="txtDa"></div>
+		<div class="field">
+			<label for="">Tax :</label>
+			<input type="range" name="" id="rangeTax" min="0" max="30">
+			<span id="spanTax">[Tax]</span>
+		</div>
+		<div class="field"><input type="button" value="Calculate" id="btnCalculate"></div>
+		<div class="field">
+			<div id="divResult">[Salary]</div>
+		</div>
+	</section>
+	<hr>
+	<section class="content" id="section-2">
 		<div class="field"><label for="">Basic :</label><input type="text" name="" id="txtBasic"></div>
 		<div class="field"><label for="">HRA :</label><input type="text" name="" id="txtHra"></div>
 		<div class="field"><label for="">DA :</label><input type="text" name="" id="txtDa"></div>
