@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
     <input type="text" [(ngModel)]="name">
     <input type="button" value="Greet" (click)="onGreet()"/>
     <hr>
-    <salary-calculator></salary-calculator>
+    <math-calculator-one></math-calculator-one>
+    <math-calculator-two></math-calculator-two>
   `,
 })
 export class AppComponent  { 
