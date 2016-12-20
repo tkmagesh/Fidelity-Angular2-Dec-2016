@@ -1,0 +1,19 @@
+li  {
+    margin-bottom: 10px;
+    padding: 5px;
+    border : 1px solid gray;
+    background-color: #e7e7e7;
+    border-radius: 5px;
+}
+.bugname {
+    cursor: pointer;
+}
+.closed {
+    color : red;
+    text-decoration: line-through;
+    font-style: italic;
+    font-weight: bold;
+}
+.stats, .bugname{
+    font-size: 18pt;
+}
