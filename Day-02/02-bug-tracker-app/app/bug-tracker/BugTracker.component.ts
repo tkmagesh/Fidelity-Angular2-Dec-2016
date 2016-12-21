@@ -9,9 +9,12 @@ import { BugOperationsService } from './services/BugOperations.service';
             <bug-stats [data]="bugs"></bug-stats>
             <section class="sort">
                 <label for="">Order By:</label>
-                <input type="text" name="" id="">
+                <select [(ngModel)]="bugSortBy">
+                    <option value="name">Name</option>
+                    <option value="isClosed">Status</option>
+                </select>
                 <label for=""> Descending ? :</label>
-                <input type="checkbox" name="" id="">
+                <input type="checkbox" [(ngModel)]="bugSortOrder">
             </section>
             <section class="edit">
                 <label for=""> Bug :</label>
@@ -20,7 +23,7 @@ import { BugOperationsService } from './services/BugOperations.service';
             </section>
             <section class="list">
                 <ol>
-                    <bug-item *ngFor="let bug of bugs" [data]="bug" (onToggle)="onBugItemToggle($event)"></bug-item>
+                    <bug-item *ngFor="let bug of (bugs | orderBy:bugSortBy:bugSortOrder)" [data]="bug" (onToggle)="onBugItemToggle($event)"></bug-item>
                 </ol>
                 <input type="button" value="Remove Closed" (click)="onRemoveClosedClick()">
             </section>
@@ -41,7 +44,7 @@ export class BugTrackerComponent{
 
     onAddNewClick(){
         let newBug : Bug = this.bugOperations.createNew(this.newBugName);
-        this.bugs.push(newBug);
+        this.bugs = this.bugs.concat([newBug]);
         this.newBugName = '';
     }
 
