@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Bug } from './models/Bug';
 import { BugStorageService } from './services/BugStorage.service';
+import { BugService } from './services/BugServer.service';
 
 @Component({
     //templateUrl : `app/bug-tracker/BugTracker.template.html`,
@@ -36,16 +37,26 @@ export class BugTrackerComponent extends OnInit{
     newBugName : string = '';
 
     ngOnInit(){
-        this.bugs = this._bugStorage.getAll();
+        //this.bugs = this._bugStorage.getAll();
+        /*this._bugService
+            .getAll()
+            .subscribe(bugs => this.bugs = bugs);
+        */
+        
     }
-    constructor(private _bugStorage : BugStorageService){
+    constructor(private _bugStorage : BugStorageService, private _bugService : BugService){
         super();
     }
 
     onAddNewClick(){
-        let newBug : Bug = this._bugStorage.add(this.newBugName);
-        this.bugs = this.bugs.concat([newBug]);
-        this.newBugName = '';
+        /*
+        this._bugService
+            .addNew(this.newBugName)
+            .subscribe(newBug => {
+                this.bugs = this.bugs.concat([newBug]);
+                this.newBugName = '';
+            });
+        */
     }
     
     onBugItemToggle(bug : Bug){
