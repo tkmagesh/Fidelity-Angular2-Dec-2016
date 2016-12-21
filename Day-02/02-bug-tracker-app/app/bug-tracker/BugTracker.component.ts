@@ -6,11 +6,7 @@ import { BugOperationsService } from './services/BugOperations.service';
     //templateUrl : `app/bug-tracker/BugTracker.template.html`,
     template : `
         <section class="content">
-            <section class="stats">
-                <span class="closed">{{ getClosedCount() }}</span>
-                <span> / </span>
-                <span>{{bugs.length}}</span>
-            </section>
+            <bug-stats [data]="bugs"></bug-stats>
             <section class="sort">
                 <label for="">Order By:</label>
                 <input type="text" name="" id="">
@@ -51,16 +47,17 @@ export class BugTrackerComponent{
 
     
 
-    getClosedCount() : number {
-        let result = 0;
-        for(let bug of this.bugs){
-            if (bug.isClosed)
-                ++result;
-        }
-        return result;
-    }
+   
     onBugItemToggle(bug : Bug){
-        this.bugOperations.toggle(bug);
+        //
+        this.bugs = this.bugs.map((b) => {
+            if (b.id === bug.id){
+                this.bugOperations.toggle(bug);
+                return bug;
+            } else {
+                return b;
+            }
+        });
         
     }
     onRemoveClosedClick(){

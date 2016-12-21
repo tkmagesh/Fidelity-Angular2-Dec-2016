@@ -6,9 +6,11 @@ import { BugOperationsService } from '../services/BugOperations.service';
     template : `
         <li>
             <span [ngClass]="{closed : data.isClosed}" class="bugname" (click)="onBugClick()">
-                {{data.name}}
+                {{ data.name | trimtext:20 }}
             </span>
+            <span> [<i>{{data.id}}</i>] </span>
             <div class="datetime">{{data.createdAt}}</div>
+
                 
         </li>
     `,

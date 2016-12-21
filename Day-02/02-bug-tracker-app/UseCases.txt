@@ -2,13 +2,13 @@ Bug Tracker
 
 Use Cases
 =========
-1. Add a new Bug
-2. List the bugs
-3. Toggle the 'closed' status of a bug
-4. Remove closed bugs
-5. Display statistics (# of closed / total number of bugs)
+1. Add a new Bug - done
+2. List the bugs - done
+3. Toggle the 'closed' status of a bug - done
+4. Remove closed bugs - done
+5. Display statistics (# of closed / total number of bugs) - done
 6. Sort the bugs
-7. Improve the bug display
+7. Improve the bug display - done
 8. Persist the bugs in the localStorage
 9. Display createdAt
 10. Persist the bugs in the server
