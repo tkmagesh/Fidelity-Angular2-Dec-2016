@@ -9,7 +9,7 @@ Use Cases
 5. Display statistics (# of closed / total number of bugs) - done
 6. Sort the bugs - done
 7. Improve the bug display - done
-8. Persist the bugs in the localStorage
+8. Persist the bugs in the localStorage - done
     window.localStorage
     ===================
         * persistent

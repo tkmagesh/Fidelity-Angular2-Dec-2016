@@ -3,12 +3,11 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class BugOperationsService{
-    currentBugId : number = 0;
+    
 
-    createNew (bugName : string) : Bug{
-        console.log(this.currentBugId);
+    createNew (id : number, bugName : string) : Bug{
         return {
-            id : ++this.currentBugId,
+            id : id,
             name : bugName,
             isClosed : false,
             createdAt : new Date()
