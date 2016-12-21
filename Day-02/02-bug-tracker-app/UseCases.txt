@@ -10,6 +10,20 @@ Use Cases
 6. Sort the bugs - done
 7. Improve the bug display - done
 8. Persist the bugs in the localStorage
-9. Display createdAt
+    window.localStorage
+    ===================
+        * persistent
+        * key/value store 
+        * value has to be a string (use JSON.stringify & JSON.parse for serialization and deserialization)
+        * APIs
+        -----
+            - setItem(key, value)   //Insert, Update
+            - removeItem(key)       //Delete
+            - getItem(key)          //Select
+            - clear()               //Delete all
+            - key(index)            //Key at index
+            - length                //Count
+            
+9. Display createdAt - done (homework)
 10. Persist the bugs in the server
 11. Make the bugs accessible through unique urls
